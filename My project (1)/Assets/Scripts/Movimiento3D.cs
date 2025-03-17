@@ -12,6 +12,13 @@ public class Movimiento3D : MonoBehaviour
     public float velocidad = 5f;
     public float vertical;
 
+    public Transform holder;
+
+    public GameObject bazoka;
+    public GameObject bala;
+
+    private bool shoot = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
 
@@ -50,10 +57,35 @@ public class Movimiento3D : MonoBehaviour
             anim.ResetTrigger("suelo");
         }
 
-            direccion -= new Vector3(0,gravedad*Time.deltaTime,0);
-            controlador.transform.Rotate(new Vector3(0,rotacion,0));
-            controlador.Move(direccion*Time.deltaTime);
+        direccion -= new Vector3(0,gravedad*Time.deltaTime,0);
+        controlador.transform.Rotate(new Vector3(0,rotacion,0));
+        controlador.Move(direccion*Time.deltaTime);
+
+        //if (Input.GetKeyDown(KeyCode.P) && this.shoot)
+        //{
+        //   Instantiate(bala, holder.position, holder.rotation);
+        //}
+
+        if (Input.GetKeyDown(KeyCode.P) && this.shoot)
+        {
+            GameObject nuevaBala = Instantiate(bala, holder.position, holder.rotation);
+            Rigidbody rbBala = nuevaBala.GetComponent<Rigidbody>();
+
+            if (rbBala != null)
+            {
+                rbBala.linearVelocity = holder.forward * 20f; 
+            }
+        }
+
         
+    }
+    void OnTriggerEnter(Collider other){
+
+        if(other.gameObject.tag == "gun"){
+            other.gameObject.SetActive(false);
+            bazoka.SetActive(true);
+            this.shoot = true;
+        }
     }
 
 
