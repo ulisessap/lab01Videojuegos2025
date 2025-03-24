@@ -8,8 +8,9 @@ public class Bala : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (rb == null)
+        if (rb == null){
             rb = GetComponent<Rigidbody>();
+        }
 
         rb.linearVelocity = transform.forward * velocidad;
         Destroy(gameObject, timeLife);

@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class Movimiento3D : MonoBehaviour
 {
@@ -12,11 +13,15 @@ public class Movimiento3D : MonoBehaviour
     public float velocidad = 5f;
     public float vertical;
 
+    public int balas;
+
     public Transform holder;
 
     public GameObject bazoka;
     public GameObject bala;
 
+    public TMP_Text balasText;
+    public GameObject pausa;
     private bool shoot = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -70,6 +75,8 @@ public class Movimiento3D : MonoBehaviour
         {
             GameObject nuevaBala = Instantiate(bala, holder.position, holder.rotation);
             Rigidbody rbBala = nuevaBala.GetComponent<Rigidbody>();
+            balas++;
+            balasText.text = balas.ToString();
 
             if (rbBala != null)
             {
