@@ -24,6 +24,11 @@ public class Movimiento3D : MonoBehaviour
     public GameObject pausa;
     private bool shoot = false;
 
+    private void Awake()
+    {
+     balas = PlayerPrefs.GetInt("balas");   
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
 
